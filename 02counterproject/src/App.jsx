@@ -2,14 +2,21 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
-  let counter = 15;
+  let [counter, setCounter] = useState(15);
 
   const addValue = () => {
-    console.log('clicked', counter);
-    counter = counter + 1;
+    if (counter === 20) {
+      setCounter(20);
+      return;
+    }
+    setCounter(counter + 1);
   };
   const removeValue = () => {
-    console.log('Value Removed');
+    if (counter === 0) {
+      setCounter(0);
+      return;
+    }
+    setCounter(counter - 1);
   };
   return (
     <>
@@ -20,7 +27,7 @@ function App() {
       <br />
       <br />
       <br />
-      <button>Remove Value</button>
+      <button onClick={removeValue}>Remove Value</button>
     </>
   );
 }
