@@ -1,9 +1,12 @@
 import Chai from './chai';
 function App() {
+  const username = 'chai aur code';
   return (
     <>
       <Chai />
-      <div>Maninder</div>
+      <div>
+        testing the variable <h1>{username}</h1>
+      </div>
     </>
   );
 }
