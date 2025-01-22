@@ -1,0 +1,15 @@
+.copy-button {
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.copy-button:hover {
+  background-color: #0056b3;
+}
+
+.copy-button:active {
+  transform: scale(0.95);
+}
+
+.copied {
+  background-color: #28a745; /* Green color for copied state */
+}

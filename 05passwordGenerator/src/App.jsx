@@ -1,6 +1,9 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
+import './App.css';
 
 function App() {
+  const [buttonText, setButtonText] = useState('Copy');
+  const [isCopied, setIsCopied] = useState(false);
   const [length, setLength] = useState(8);
   const [numberAllowed, setNumberAllowed] = useState(false);
   const [charAllowed, setCharAllowed] = useState(false);
@@ -26,7 +29,16 @@ function App() {
   const copyPasswordToClipBoard = useCallback(() => {
     passwordRef.current?.select();
     // passwordRef.current?.setSelectionRange(0, 3);
-    window.navigator.clipboard.writeText(password);
+    window.navigator.clipboard.writeText(password).then(() => {
+      setButtonText('Copied!');
+      setIsCopied(true);
+
+      // Revert the button text after 3 seconds
+      setTimeout(() => {
+        setButtonText('Copy');
+        setIsCopied(false);
+      }, 3000);
+    });
   }, [password]);
   useEffect(() => {
     passwordGenerator();
@@ -44,12 +56,14 @@ function App() {
           ref={passwordRef}
           readOnly
         />
-
+        {/* className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0' */}
         <button
-          className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'
+          className={`outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0 copy-button ${
+            isCopied ? 'copied' : ''
+          }`}
           onClick={copyPasswordToClipBoard}
         >
-          copy
+          {buttonText}
         </button>
       </div>
 
