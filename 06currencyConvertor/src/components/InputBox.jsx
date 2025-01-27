@@ -1,4 +1,5 @@
-import { useId } from 'React';
+import { useId } from 'react';
+import PropTypes from 'prop-types';
 
 function InputBox({
   label,
@@ -9,7 +10,6 @@ function InputBox({
   selectCurrency = 'usd',
   amountDisable = false,
   currencyDisable = false,
-  className = '',
 }) {
   const amountInputId = useId();
 
@@ -47,20 +47,21 @@ function InputBox({
               </option>
             );
           })}
-          ;
-          {/* <option
-            value='usd'
-            onChange={(e) =>
-              onCurrencyChange && onCurrencyChange(e.target.value)
-            }
-            disabled={currencyDisable}
-          >
-            usd
-          </option> */}
         </select>
       </div>
     </div>
   );
 }
+InputBox.propTypes = {
+  label: PropTypes.string.isRequired,
+  amount: PropTypes.number.isRequired,
+  onAmountChange: PropTypes.func,
+  onCurrencyChange: PropTypes.func.isRequired,
+  currencyOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectCurrency: PropTypes.string,
+  amountDisable: PropTypes.bool,
+  currencyDisable: PropTypes.bool,
+  className: PropTypes.string,
+};
 
 export default InputBox;
