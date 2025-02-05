@@ -51,7 +51,12 @@ const router = createBrowserRouter(
       <Route
         path='about'
         element={<About />}
-      />
+      >
+        <Route
+          path='test'
+          element={<About />}
+        />
+      </Route>
       <Route
         path='contact'
         element={<Contact />}
